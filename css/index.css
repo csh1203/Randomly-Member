@@ -20,6 +20,8 @@ input[type="text"] {
     height: 50px;
 }
 
+
+#input,
 #draw {
     width: 30%;
     height: 50px;

@@ -1,19 +1,27 @@
 const nameInput = document.getElementById("name-input");
 const membersDiv = document.getElementById("members");
+const inputButton = document.getElementById("input");
 const dividedInput = document.getElementById("divided-input");
 const drawButton = document.getElementById("draw");
 const resultDiv = document.getElementById("result");
 
 const members = [];
 
-nameInput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter" && nameInput.value.trim() !== "") {
-        members.push(nameInput.value.trim());
+// 입력
+inputButton.onclick = () => {
+        const value = nameInput.value.trim();
+        
+    if (value !== "") {
+        members.push(value);
+        const listItem = document.createElement('div');
+        listItem.classList.add('member');
+        listItem.textContent = value;
+        membersDiv.appendChild(listItem);
         nameInput.value = "";
-        displayMembers();
     }
-});
+};
 
+// 뽑기 
 drawButton.addEventListener("click", function () {
     const count = parseInt(dividedInput.value);
 
@@ -27,10 +35,7 @@ drawButton.addEventListener("click", function () {
     }
 });
 
-function displayMembers() {
-    membersDiv.innerHTML = members.join(", ");
-}
-
+// 배열 섞기
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -39,6 +44,7 @@ function shuffleArray(array) {
     return array;
 }
 
+// 팀 개수대로 나누기
 function distributeMembers(members, count) {
     const teams = [];
     for (let i = 0; i < count; i++) {
@@ -51,10 +57,11 @@ function distributeMembers(members, count) {
     return teams;
 }
 
+// HTML 에 보여주기
 function displayTeams(teams) {
-    resultDiv.innerHTML = "";
     teams.forEach((team, index) => {
         const teamDiv = document.createElement("div");
+        teamDiv.classList.add('team');
         teamDiv.textContent = `팀 ${index + 1}: ${team.join(", ")}`;
         resultDiv.appendChild(teamDiv);
     });
