@@ -58,4 +58,6 @@ function displayTeams(teams) {
         teamDiv.textContent = `팀 ${index + 1}: ${team.join(", ")}`;
         resultDiv.appendChild(teamDiv);
     });
+    console.log(teams[0].length);
+    resultDiv.style.gridTemplateRows = `${teams.length}`;
 }
